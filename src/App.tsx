@@ -6,6 +6,7 @@ import Error from './pages/Error';
 import Login from './pages/Login';
 import MyProfile from './components/dashboard/MyProfile';
 import ProtectedRoute from './components/ProtectedRoute';
+import Gdp_Population from './components/dashboard/Gdp_Population';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -22,9 +23,7 @@ const router = createBrowserRouter([
     path: 'login',
     element: <Login />,
     errorElement: <Error />,
-  },
-
-  
+  },  
   {
     path: 'dashboard/me',
     element: (
@@ -37,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <MyProfile />,
+      },
+      {
+        path: "gdp-population",
+        element: <Gdp_Population />,
       },
        ]
   },

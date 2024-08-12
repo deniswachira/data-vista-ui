@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice';
 import { userApi } from '../features/api/userApiSlice';
+import { dataApi } from '../features/api/dataApiSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -19,12 +20,13 @@ const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
+    [dataApi.reducerPath]: dataApi.reducer,
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // To avoid serialization errors with redux-persist
-    }).concat(userApi.middleware,), // Include the bookingApi middleware
+    }).concat(userApi.middleware,dataApi.middleware), // Include the bookingApi middleware
 });
 
 // Export the persisted store

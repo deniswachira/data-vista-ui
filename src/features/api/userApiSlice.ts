@@ -8,7 +8,7 @@ import { apiDomain } from '../../proxxy/proxxy';
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({ baseUrl: apiDomain }),
-  tagTypes: ['users', 'user'],
+  tagTypes: ['user'],
   endpoints: (builder) => ({
     loginUser: builder.mutation({
       query: (credentials: UserLoginFormValues, ) => ({
@@ -28,41 +28,16 @@ export const userApi = createApi({
       query: (user_id: number) => `users/${user_id}`,
       providesTags: ["user",]
     }),
-    getUsersProfiles: builder.query({
-      query: () => 'users',
-      providesTags: ["users"]
-    }),
-    getUserProfile: builder.query({
-      query: (userId: number) => `users/${userId}`,  
-      providesTags: ["user"]    
-    }),
+  
     updateUserProfile: builder.mutation<TUser,Partial<TUser>>({
       query: ({ user_id, ...patch }) => ({
         url: `users/${user_id}`,
         method: 'PUT',
         body: patch,
       }),
-      invalidatesTags: ["user", "users"]
+      invalidatesTags: ["user", ]
     }),
-  updateUserProfileImage: builder.mutation({
-    query: ({ user_id, profile_picture }) => ({
-      url: `users/${user_id}`,
-      method: 'PUT',
-      body: { profile_picture },
-    }),
-    invalidatesTags: ["user", "users"]
-  }),
-    deleteUserProfile: builder.mutation({
-      query: (user_id) => ({
-        url: `users/${user_id}`,
-        method: 'DELETE',
-      }),
-  }),
 }),
 });
 
-
-
-// Export the auto-generated hooks for each endpoint
-// export default userApi;
 
