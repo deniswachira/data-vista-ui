@@ -1,4 +1,4 @@
-import  { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { dataApi } from "../../features/api/dataApiSlice";
 
@@ -34,7 +34,7 @@ const Gdp_Population = () => {
   const { data: populationData, isError: populationIsError, isLoading: populationIsLoading } = dataApi.useGetPopulationQuery(1, {});
   const { data: gdpPerCapitaData, isError: gdpPerCapitaIsError, isLoading: gdpPerCapitaIsLoading } = dataApi.useGetGdpPerCapitaQuery(1, {});
 
-  // Handle loading and error states
+  // Early return for loading or error states
   if (gdpIsLoading || populationIsLoading || gdpPerCapitaIsLoading) {
     return <div>Loading...</div>;
   }
@@ -44,18 +44,26 @@ const Gdp_Population = () => {
   }
 
   // Process and sort data
-  const formatData = (data: any[]) => {
-    return sortByYear(data.map(item => ({
+  const formattedGdpData = useMemo(() => {
+    return sortByYear(gdpData.map((item: { year: any; value: any; }) => ({
       year: item.year,
       gdp: item.value,
+    })));
+  }, [gdpData]);
+
+  const formattedPopulationData = useMemo(() => {
+    return sortByYear(populationData.map((item: { year: any; value: any; }) => ({
+      year: item.year,
       population: item.value,
+    })));
+  }, [populationData]);
+
+  const formattedGdpPerCapitaData = useMemo(() => {
+    return sortByYear(gdpPerCapitaData.map((item: { year: any; value: any; }) => ({
+      year: item.year,
       gdpPerCapita: item.value,
     })));
-  };
-
-  const formattedGdpData = formatData(gdpData);
-  const formattedPopulationData = formatData(populationData);
-  const formattedGdpPerCapitaData = formatData(gdpPerCapitaData);
+  }, [gdpPerCapitaData]);
 
   // Filter data based on the selected period
   const filteredGdpData = useMemo(() => filterDataByPeriod(formattedGdpData, selectedPeriod), [selectedPeriod, formattedGdpData]);
@@ -92,7 +100,7 @@ const Gdp_Population = () => {
               <XAxis dataKey="year" />
               <YAxis
                 tickFormatter={(value: any) => formatYAxisTick(value).toString()}
-                domain={[minGdp * 0.9, maxGdp * 1.1]} // Adjust domain to fit the range of data
+                domain={[minGdp * 0.9, maxGdp * 1.1]}
               />
               <Tooltip />
               <Legend />

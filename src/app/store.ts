@@ -5,28 +5,34 @@ import { dataApi } from '../features/api/dataApiSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
-// Create a persist config for the auth slice
+// Persist config for auth slice
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['user', 'token', 'isAuthenticated','role'], // Specify which parts of the state to persist
+  whitelist: ['user', 'token', 'isAuthenticated', 'role'],
 };
 
-// Create a persisted reducer for the auth slice
+// Persist config for dataApi slice
+const dataPersistConfig = {
+  key: 'dataApi',
+  storage,
+  whitelist: [dataApi.reducerPath], // Persist the API data
+};
+
+// Create persisted reducers
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
-
-
+const persistedDataReducer = persistReducer(dataPersistConfig, dataApi.reducer);
 
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
-    [dataApi.reducerPath]: dataApi.reducer,
+    [dataApi.reducerPath]: persistedDataReducer, // Use the persisted data reducer
     auth: persistedAuthReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // To avoid serialization errors with redux-persist
-    }).concat(userApi.middleware,dataApi.middleware), // Include the bookingApi middleware
+      serializableCheck: false, // Avoid serialization errors with redux-persist
+    }).concat(userApi.middleware, dataApi.middleware), // Include the API middlewares
 });
 
 // Export the persisted store

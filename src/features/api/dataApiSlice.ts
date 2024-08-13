@@ -19,5 +19,9 @@ export const dataApi = createApi({
         query: () => 'gdp_per_capita',
       providesTags: ['data'],
     }),
+    getExchangeRate: builder.query({
+        query: () => 'exchange_rate',
+        providesTags: ['data'],
+     }),
   }),
 });

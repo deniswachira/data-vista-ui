@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import MyProfile from './components/dashboard/MyProfile';
 import ProtectedRoute from './components/ProtectedRoute';
 import Gdp_Population from './components/dashboard/Gdp_Population';
+import Exchange_rate from './components/dashboard/Exchange_rate';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "gdp-population",
         element: <Gdp_Population />,
+      },
+      {
+        path: "exchange-rate",
+        element: <Exchange_rate />,
       },
        ]
   },

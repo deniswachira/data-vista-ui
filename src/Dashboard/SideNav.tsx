@@ -43,12 +43,12 @@ function SideNav() {
                     <ul className="ml-8 mt-2 space-y-2">
                         <li>
                             <Link to="gdp-population" className="flex items-center">
-                                <span className="text-blue-600">Dashboard 1</span>
+                                <span className="text-blue-600">GDP</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to="dashboard-2" className="flex items-center">
-                                <span className="text-blue-600">Dashboard 2</span>
+                            <Link to="exchange-rate" className="flex items-center">
+                                <span className="text-blue-600">Exchange</span>
                             </Link>
                         </li>
                         <li>
