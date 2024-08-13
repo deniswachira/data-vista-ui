@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SquareUserRound, LogOut, BarChart, DollarSign, Lock, Unlock, ChevronDown, ChevronUp } from "lucide-react";
+import { SquareUserRound, LogOut, BarChart, DollarSign, Lock,  ChevronDown, ChevronUp } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCredentials } from "../features/auth/authSlice";

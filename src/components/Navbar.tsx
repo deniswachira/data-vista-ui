@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { clearCredentials } from "../features/auth/authSlice";
 import { FaBars, FaHome, FaSignInAlt, FaSignOutAlt} from "react-icons/fa";
-import logo from "../assets/logo.svg";
 import { GrDashboard } from "react-icons/gr";
 import { userApi } from "../features/api/userApiSlice";
 
