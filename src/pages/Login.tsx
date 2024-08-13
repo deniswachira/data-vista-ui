@@ -10,6 +10,8 @@ import loginPic from '../assets/login1.svg';
 import { NavLink } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { RootState } from '../app/store';
+import { setGdpData, setPopulationData, setGdpPerCapitaData, setExchangeRateData } from '../features/dataSlice';
+import { dataApi } from '../features/api/dataApiSlice';
 
 type FormValues = {
     email: string;
@@ -22,22 +24,33 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isAuthenticated, role } = useSelector((state: RootState) => state.auth);
+    const { data: gdpData } = dataApi.useGetGdpQuery(1, {});
+    const { data: populationData } = dataApi.useGetPopulationQuery(1, {});
+    const { data: gdpPerCapitaData } = dataApi.useGetGdpPerCapitaQuery(1, {});
+    const { data: exchangeRateData } = dataApi.useGetExchangeRateQuery(1, {});
 
     useEffect(() => {
         if (isAuthenticated) {
+            // Fetch data once after login and store it in the Redux store
+            if (gdpData) dispatch(setGdpData(gdpData));
+            if (populationData) dispatch(setPopulationData(populationData));
+            if (gdpPerCapitaData) dispatch(setGdpPerCapitaData(gdpPerCapitaData));
+            if (exchangeRateData) dispatch(setExchangeRateData(exchangeRateData));
+
+            // Navigate based on the user's role
             if (role === 'admin') {
                 navigate('/dashboard/admin');
             } else {
                 navigate('/dashboard/me');
             }
         }
-    }, [role, navigate]);
+    }, [isAuthenticated, role, navigate, gdpData, populationData, gdpPerCapitaData, exchangeRateData, dispatch]);
 
     const onSubmit = async (data: FormValues) => {
         try {
             const user = await loginUser(data).unwrap();
             dispatch(setCredentials({ user, token: user.token, role: user.role }));
-                navigate('/');
+            navigate('/');
         } catch (err: any) {
             toast.error('Failed to login: ' + (err.data?.msg || err.msg || err.error || err));
         }

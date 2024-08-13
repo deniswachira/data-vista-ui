@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { dataApi } from "../../features/api/dataApiSlice";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 
 // Helper function to format Y-axis ticks for large values
 const formatYAxisTick = (value: number) => {
@@ -30,17 +31,14 @@ const filterDataByPeriod = (data: any[], period: string) => {
 const Gdp_Population = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('Full');
 
-  const { data: gdpData, isError: gdpIsError, isLoading: gdpIsLoading } = dataApi.useGetGdpQuery(1, {});
-  const { data: populationData, isError: populationIsError, isLoading: populationIsLoading } = dataApi.useGetPopulationQuery(1, {});
-  const { data: gdpPerCapitaData, isError: gdpPerCapitaIsError, isLoading: gdpPerCapitaIsLoading } = dataApi.useGetGdpPerCapitaQuery(1, {});
+  // Fetch persisted data from Redux store
+  const gdpData = useSelector((state: RootState) => state.data.gdpData);
+  const populationData = useSelector((state: RootState) => state.data.populationData);
+  const gdpPerCapitaData = useSelector((state: RootState) => state.data.gdpPerCapitaData);
 
-  // Early return for loading or error states
-  if (gdpIsLoading || populationIsLoading || gdpPerCapitaIsLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (gdpIsError || populationIsError || gdpPerCapitaIsError) {
-    return <div>Error loading data.</div>;
+  // Ensure that data is present before using it
+  if (!gdpData || !populationData || !gdpPerCapitaData) {
+    return <div>No data available.</div>;
   }
 
   // Process and sort data

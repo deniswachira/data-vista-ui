@@ -4,6 +4,7 @@ import { userApi } from '../features/api/userApiSlice';
 import { dataApi } from '../features/api/dataApiSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
+import dataReducer from '../features/dataSlice';
 
 // Persist config for auth slice
 const authPersistConfig = {
@@ -12,22 +13,23 @@ const authPersistConfig = {
   whitelist: ['user', 'token', 'isAuthenticated', 'role'],
 };
 
-// Persist config for dataApi slice
+// Persist config for data slice
 const dataPersistConfig = {
-  key: 'dataApi',
+  key: 'data',
   storage,
-  whitelist: [dataApi.reducerPath], // Persist the API data
+  whitelist: ['gdpData', 'populationData', 'gdpPerCapitaData', 'exchangeRateData'], // Whitelist the slices you want to persist
 };
 
 // Create persisted reducers
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
-const persistedDataReducer = persistReducer(dataPersistConfig, dataApi.reducer);
+const persistedDataReducer = persistReducer(dataPersistConfig, dataReducer);
 
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
-    [dataApi.reducerPath]: persistedDataReducer, // Use the persisted data reducer
+    [dataApi.reducerPath]: dataApi.reducer,
     auth: persistedAuthReducer,
+    data: persistedDataReducer, // Add the persisted data reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
