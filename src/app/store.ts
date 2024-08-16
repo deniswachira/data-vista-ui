@@ -5,6 +5,7 @@ import { dataApi } from '../features/api/dataApiSlice';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import dataReducer from '../features/dataSlice';
+import {paymentApi} from '../features/api/paymentApiSlice';
 
 // Persist config for auth slice
 const authPersistConfig = {
@@ -17,7 +18,7 @@ const authPersistConfig = {
 const dataPersistConfig = {
   key: 'data',
   storage,
-  whitelist: ['gdpData', 'populationData', 'gdpPerCapitaData', 'exchangeRateData'], // Whitelist the slices you want to persist
+  whitelist: ['gdpData', 'populationData', 'gdpPerCapitaData', 'exchangeRateData','inflationRateData', 'safaricomSharePriceData'], // Whitelist the slices you want to persist
 };
 
 // Create persisted reducers
@@ -28,13 +29,14 @@ export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
     [dataApi.reducerPath]: dataApi.reducer,
+    [paymentApi.reducerPath]: paymentApi.reducer,
     auth: persistedAuthReducer,
     data: persistedDataReducer, // Add the persisted data reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // Avoid serialization errors with redux-persist
-    }).concat(userApi.middleware, dataApi.middleware), // Include the API middlewares
+    }).concat(userApi.middleware, dataApi.middleware, paymentApi.middleware), // Include the API middlewares
 });
 
 // Export the persisted store

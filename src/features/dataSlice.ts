@@ -5,6 +5,8 @@ interface DataState {
     populationData: any[];
     gdpPerCapitaData: any[];
     exchangeRateData: any[];
+    inflationRateData: any[];
+    safaricomSharePriceData: any[];
 }
 
 const initialState: DataState = {
@@ -12,6 +14,8 @@ const initialState: DataState = {
     populationData: [],
     gdpPerCapitaData: [],
     exchangeRateData: [],
+    inflationRateData: [],
+    safaricomSharePriceData: [],
 };
 
 const dataSlice = createSlice({
@@ -30,6 +34,12 @@ const dataSlice = createSlice({
         setExchangeRateData(state, action: PayloadAction<any[]>) {
             state.exchangeRateData = action.payload;
         },
+        setInflationRateData(state, action: PayloadAction<any[]>) {
+            state.inflationRateData = action.payload;
+        },
+        setSafaricomSharePriceData(state, action: PayloadAction<any[]>) {
+            state.safaricomSharePriceData = action.payload;
+        },
     },
 });
 
@@ -38,6 +48,8 @@ export const {
     setPopulationData,
     setGdpPerCapitaData,
     setExchangeRateData,
+    setInflationRateData,
+    setSafaricomSharePriceData,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

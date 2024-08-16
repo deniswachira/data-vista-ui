@@ -75,7 +75,7 @@ const Gdp_Population = () => {
 
   return (
     <div className="p-8 space-y-8">
-      <h1 className="text-3xl font-bold mb-4">Macroeconomic Data</h1>
+      <h1 className="text-3xl font-bold mb-4 text-blue-600">Macroeconomic Data</h1>
 
       <div className="flex space-x-4 mb-4">
         {['5', '10', 'Full'].map(period => (
@@ -91,7 +91,7 @@ const Gdp_Population = () => {
 
       <div className="space-y-4">
         <div className="bg-white p-4 rounded-lg shadow-lg h-[300px]" key="gdp-chart">
-          <h2 className="text-2xl font-semibold mb-2">Historical GDP of Kenya</h2>
+          <h2 className="text-2xl font-semibold mb-2 text-blue-600">Historical GDP of Kenya</h2>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={filteredGdpData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -108,7 +108,7 @@ const Gdp_Population = () => {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow-lg h-[300px]" key="population-chart">
-          <h2 className="text-2xl font-semibold mb-2">Historical Population of Kenya</h2>
+          <h2 className="text-2xl font-semibold mb-2 text-blue-600">Historical Population of Kenya</h2>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={filteredPopulationData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -122,7 +122,7 @@ const Gdp_Population = () => {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow-lg h-[300px]" key="gdp-per-capita-chart">
-          <h2 className="text-2xl font-semibold mb-2">Historical GDP per Capita of Kenya</h2>
+          <h2 className="text-2xl font-semibold mb-2 text-blue-600">Historical GDP per Capita of Kenya</h2>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={filteredGdpPerCapitaData}>
               <CartesianGrid strokeDasharray="3 3" />

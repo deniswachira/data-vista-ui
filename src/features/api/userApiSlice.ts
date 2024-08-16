@@ -37,6 +37,15 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["user", ]
     }),
+    upgradeUser: builder.mutation<boolean, number>({
+      query: (user_id: number) => ({
+        url: `users/${user_id}/upgrade`,
+        method: 'PUT',
+      }),
+    }),   
+    checkUserIsPremium: builder.query<boolean, number>({
+      query: (user_id: number) => `users/${user_id}/isPremium`,
+    }),
 }),
 });
 

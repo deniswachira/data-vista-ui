@@ -21,7 +21,7 @@ const MyProfile = () => {
   const { user, isAuthenticated, role } = useSelector((state: RootState) => state.auth);
   const [updateProfile, { isLoading }] = userApi.useUpdateUserProfileMutation();
   const { data: userData } = userApi.useGetUserByIdQuery(user?.user.user_id);
-  const profilePicture = user?.user.profile_picture || 'https://via.placeholder.com/150';
+  const profilePicture = `https://ui-avatars.com/api/?name=${userData?.full_name}&background=random` || 'https://via.placeholder.com/150';
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalToggle = () => {

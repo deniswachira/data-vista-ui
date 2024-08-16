@@ -11,7 +11,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const { user, isAuthenticated, role } = useSelector((state: RootState) => state.auth);
     const{data:userData} = userApi.useGetUserByIdQuery(user?.user.user_id);
-    const profilePicture = user?.user.profile_picture || 'https://via.placeholder.com/150';
+    const profilePicture = `https://ui-avatars.com/api/?name=${userData?.full_name}&background=random` || 'https://via.placeholder.com/150';
 
     const handleLogout = () => {
         dispatch(clearCredentials());
@@ -60,12 +60,27 @@ const Navbar = () => {
                     </Link>
                 ) : (
                     <div className="dropdown dropdown-end">
-                        <button className="btn btn-ghost flex items-center ">                         
+                        <button className="btn btn-ghost flex items-center ">  
+                            <span className="text-dark">Hey,</span>                              
+                            <svg
+                                className="w-6 h-6 "
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 9l-7 7-7-7"
+                                />
+                            </svg>                     
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
                                         <img
                                             alt="profile"
-                                            src={userData?.profile_picture || profilePicture} />
+                                            src={ profilePicture} />
                                     </div>
                                 </div>
 

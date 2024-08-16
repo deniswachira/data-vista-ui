@@ -6,10 +6,10 @@ import Card from './Card'
 function Layout() {
     return (
         <div className='flex max-h-fit min-h-full  text-green-400'>
-            <div className='min-w-[17%]  '>
+            <div className='min-w-[18%]  '>
                 <SideNav />
             </div>
-            <div className='flex flex-col min-w-[83%] '>
+            <div className='flex flex-col min-w-[81%] '>
                 {/* <Nav /> */}
                 <div className="h-fit">
                     <Card>

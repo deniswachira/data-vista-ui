@@ -10,7 +10,7 @@ import loginPic from '../assets/login1.svg';
 import { NavLink } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { RootState } from '../app/store';
-import { setGdpData, setPopulationData, setGdpPerCapitaData, setExchangeRateData } from '../features/dataSlice';
+import { setGdpData, setPopulationData, setGdpPerCapitaData, setExchangeRateData, setInflationRateData, setSafaricomSharePriceData } from '../features/dataSlice';
 import { dataApi } from '../features/api/dataApiSlice';
 
 type FormValues = {
@@ -28,6 +28,8 @@ export default function Login() {
     const { data: populationData } = dataApi.useGetPopulationQuery(1, {});
     const { data: gdpPerCapitaData } = dataApi.useGetGdpPerCapitaQuery(1, {});
     const { data: exchangeRateData } = dataApi.useGetExchangeRateQuery(1, {});
+    const { data: inflationRateData } = dataApi.useGetInflationRateQuery(1, {});
+    const {data: safaricomSharePriceData} = dataApi.useGetSafaricomSharePriceQuery(1, {});
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -36,6 +38,8 @@ export default function Login() {
             if (populationData) dispatch(setPopulationData(populationData));
             if (gdpPerCapitaData) dispatch(setGdpPerCapitaData(gdpPerCapitaData));
             if (exchangeRateData) dispatch(setExchangeRateData(exchangeRateData));
+            if (inflationRateData) dispatch(setInflationRateData(inflationRateData));
+            if (safaricomSharePriceData) dispatch(setSafaricomSharePriceData(safaricomSharePriceData));
 
             // Navigate based on the user's role
             if (role === 'admin') {
@@ -44,7 +48,7 @@ export default function Login() {
                 navigate('/dashboard/me');
             }
         }
-    }, [isAuthenticated, role, navigate, gdpData, populationData, gdpPerCapitaData, exchangeRateData, dispatch]);
+    }, [isAuthenticated, role, navigate, gdpData, populationData, gdpPerCapitaData, exchangeRateData,inflationRateData,safaricomSharePriceData, dispatch]);
 
     const onSubmit = async (data: FormValues) => {
         try {

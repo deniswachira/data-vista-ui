@@ -23,5 +23,13 @@ export const dataApi = createApi({
         query: () => 'exchange_rate',
         providesTags: ['data'],
      }),
+    getInflationRate: builder.query({
+        query: () => 'inflation_rate',
+        providesTags: ['data'],
+    }),
+    getSafaricomSharePrice: builder.query({
+        query: () => 'safaricom_share_prices',
+        providesTags: ['data'],
+    }),
   }),
 });

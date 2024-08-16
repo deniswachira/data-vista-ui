@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { SquareUserRound, LogOut, BarChart, DollarSign, Lock,  ChevronDown, ChevronUp } from "lucide-react";
+import { SquareUserRound, LogOut, BarChart, DollarSign,  ChevronDown, ChevronUp } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCredentials } from "../features/auth/authSlice";
 
 function SideNav() {
-    const [activeDropdown, setActiveDropdown] = useState(null); // State to manage dropdowns
+    const [activeDropdown, setActiveDropdown] = useState<number | null>(null); // State to manage dropdowns
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ function SideNav() {
         navigate('/login');
     };
 
-    const toggleDropdown = (index:any) => {
+    const toggleDropdown = (index: number) => {
         setActiveDropdown(activeDropdown === index ? null : index);
     };
 
@@ -51,9 +51,32 @@ function SideNav() {
                                 <span className="text-blue-600">Exchange</span>
                             </Link>
                         </li>
+                    </ul>
+                )}
+            </li>
+
+            {/* Dropdown for Dashboard 3 */}
+            <li>
+                <button
+                    className="flex items-center w-full"
+                    onClick={() => toggleDropdown(2)}
+                >
+                    <BarChart className="text-4xl text-purple-600 mr-4" />
+                    <span className="hidden lg:inline ml-2 font-bold text-purple-600">Inflations</span>
+                    <span className="ml-auto text-purple-600">
+                        {activeDropdown === 2 ? <ChevronUp /> : <ChevronDown />}
+                    </span>
+                </button>
+                {activeDropdown === 2 && (
+                    <ul className="ml-8 mt-2 space-y-2">
                         <li>
-                            <Link to="dashboard-3" className="flex items-center">
-                                <span className="text-blue-600">Dashboard 3</span>
+                            <Link to="monthly-inflation" className="flex items-center">
+                                <span className="text-purple-600">Monthly</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="historical-inflation" className="flex items-center">
+                                <span className="text-purple-600">Historical</span>
                             </Link>
                         </li>
                     </ul>
@@ -64,26 +87,25 @@ function SideNav() {
             <li>
                 <button
                     className="flex items-center w-full"
-                    onClick={() => toggleDropdown(2)}
+                    onClick={() => toggleDropdown(3)}
                 >
                     <DollarSign className="text-4xl text-green-600 mr-4" />
                     <span className="hidden lg:inline ml-2 font-bold text-green-600">Financial Analysis</span>
                     <span className="ml-auto text-green-600">
-                        {activeDropdown === 2 ? <ChevronUp /> : <ChevronDown />}
+                        {activeDropdown === 3 ? <ChevronUp /> : <ChevronDown />}
                     </span>
                 </button>
-                {activeDropdown === 2 && (
+                {activeDropdown === 3 && (
                     <ul className="ml-8 mt-2 space-y-2">
                         <li>
                             <Link to="share-prices" className="flex items-center">
-                                <span className="text-green-600">Historical Share Prices</span>
+                                <span className="text-green-600">Daily Share Prices</span>
                             </Link>
                         </li>
                         <li>
-                            <button className="flex items-center">
-                                <Lock className="text-green-600 mr-2" />
-                                <span className="text-green-600">Full Member Content</span>
-                            </button>
+                            <Link to="historical-prices" className="flex items-center">
+                                <span className="text-green-600">Historical Share Prices</span>
+                            </Link>
                         </li>
                     </ul>
                 )}
