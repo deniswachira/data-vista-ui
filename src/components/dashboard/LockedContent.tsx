@@ -75,23 +75,23 @@ const LockedContent = () => {
     };
 
     return (
-        <div className="bg-white text-green-500 p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Historical Daily Share Prices of Safaricom (From June 2024)</h2>
-            <div className="flex gap-4 mb-4">
+        <div className="bg-white text-green-500 p-4 md:p-6 rounded-lg shadow-md">
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">Historical Daily Share Prices of Safaricom (From June 2024)</h2>
+            <div className="flex flex-wrap gap-2 mb-4">
                 <button
-                    className={`px-4 py-2 rounded ${activeFilter === '3M' ? 'bg-green-500 text-white' : 'bg-green-300 text-white'}`}
+                    className={`px-3 py-2 rounded ${activeFilter === '3M' ? 'bg-green-500 text-white' : 'bg-green-300 text-white'}`}
                     onClick={() => handleFilter('3M')}
                 >
                     Last 3 Months
                 </button>
                 <button
-                    className={`px-4 py-2 rounded ${activeFilter === '1M' ? 'bg-green-500 text-white' : 'bg-green-300 text-white'}`}
+                    className={`px-3 py-2 rounded ${activeFilter === '1M' ? 'bg-green-500 text-white' : 'bg-green-300 text-white'}`}
                     onClick={() => handleFilter('1M')}
                 >
                     Last 1 Month
                 </button>
                 <button
-                    className={`px-4 py-2 rounded ${activeFilter === '5D' ? 'bg-green-500 text-white' : 'bg-green-300 text-white'}`}
+                    className={`px-3 py-2 rounded ${activeFilter === '5D' ? 'bg-green-500 text-white' : 'bg-green-300 text-white'}`}
                     onClick={() => handleFilter('5D')}
                 >
                     Last 5 Days

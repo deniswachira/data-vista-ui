@@ -1,6 +1,6 @@
-import {  useMemo } from "react";
+import { useMemo } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { useSelector, } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store'; // Adjust the path as needed
 
 interface ExchangeRateData {
@@ -43,11 +43,11 @@ const ExchangeRate = () => {
     const formattedExchangeRateData = useMemo(() => calculateYearlyMean(exchangeRateData || []), [exchangeRateData]);
 
     return (
-        <div className="p-8 space-y-8">
-            <h1 className="text-3xl font-bold mb-4">USD/KES Exchange Rate</h1>
+        <div className="p-4 md:p-8 space-y-8">
+            <h1 className="text-2xl md:text-3xl font-bold mb-4 text-blue-600">USD/KES Exchange Rate</h1>
 
-            <div className="bg-white p-4 rounded-lg shadow-lg h-[300px]">
-                <h2 className="text-2xl font-semibold mb-2">Historical USD/KES Exchange Rate</h2>
+            <div className="bg-white p-4 rounded-lg shadow-lg h-[200px] md:h-[300px]">
+                <h2 className="text-lg md:text-2xl font-semibold mb-2 text-blue-600">Historical USD/KES Exchange Rate</h2>
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={formattedExchangeRateData}>
                         <CartesianGrid strokeDasharray="3 3" />

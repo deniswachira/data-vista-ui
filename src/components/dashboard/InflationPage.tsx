@@ -13,8 +13,8 @@ const InflationComparison = ({ data }: { data: { month: string; inflation: numbe
     const percentageChange = ((parseFloat(difference) / previousMonth.inflation) * 100).toFixed(2);
 
     return (
-        <div className="bg-white text-gray-900 py-12 px-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Inflation Comparison</h2>
+        <div className="bg-white text-gray-900 py-6 px-4 md:py-12 md:px-8 rounded-lg shadow-md">
+            <h2 className="text-xl md:text-2xl font-semibold mb-4">Inflation Comparison</h2>
             <p className="flex items-center">
                 <strong>Current Month ({currentMonth.month}):</strong> {currentMonth.inflation}%
             </p>
@@ -41,17 +41,19 @@ const InflationPage = () => {
 
     return (
         <div
-            className="bg-cover bg-center"
+            className="bg-cover bg-center min-h-screen"
             style={{ backgroundImage: "url('/path-to-your-background-image.jpg')" }}
         >
-            <div className="bg-gradient-to-r from-white to-transparent py-5 px-2 min-h-screen">
-                <h1 className="text-center text-2xl font-bold text-gray-900 my-2">Monthly Inflation Analysis Comparison</h1>
+            <div className="bg-gradient-to-r from-white to-transparent py-5 px-4 md:px-8 min-h-screen">
+                <h1 className="text-center text-xl md:text-2xl font-bold text-gray-900 my-4">Monthly Inflation Analysis Comparison</h1>
+
                 <div className="mb-5">
                     <InflationComparison data={inflationData} />
                 </div>
-                <div className="bg-white text-gray-900 py-12 px-2 rounded-lg shadow-md">
-                    <h2 className="text-2xl font-semibold mb-4">Montly Inflation Trend</h2>
-                    <ResponsiveContainer width="50%" height={200}>
+
+                <div className="bg-white text-gray-900 py-6 px-4 md:py-12 md:px-8 rounded-lg shadow-md">
+                    <h2 className="text-xl md:text-2xl font-semibold mb-4">Monthly Inflation Trend</h2>
+                    <ResponsiveContainer width="100%" height={300}>
                         <LineChart data={inflationData}>
                             <XAxis dataKey="month" />
                             <YAxis />

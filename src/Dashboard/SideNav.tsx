@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { SquareUserRound, LogOut, BarChart, DollarSign,  ChevronDown, ChevronUp } from "lucide-react";
+import { SquareUserRound, LogOut, BarChart, DollarSign, ChevronDown, ChevronUp, TrendingUp, History, DollarSignIcon, } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCredentials } from "../features/auth/authSlice";
 
 function SideNav() {
-    const [activeDropdown, setActiveDropdown] = useState<number | null>(null); // State to manage dropdowns
+    const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ function SideNav() {
     };
 
     return (
-        <ul className="menu bg-base-200 min-w-full gap-2 text-base-content min-h-full">
+        <ul className="menu bg-base-200 min-w-full  text-base-content min-h-full p-2">
             <li>
                 <Link to="" className="flex items-center">
                     <SquareUserRound className="text-4xl text-yellow-600 mr-4" />
@@ -40,43 +40,47 @@ function SideNav() {
                     </span>
                 </button>
                 {activeDropdown === 1 && (
-                    <ul className="ml-8 mt-2 space-y-2">
+                    <ul className="ml-2 mt-2 space-y-2">
                         <li>
                             <Link to="gdp-population" className="flex items-center">
-                                <span className="text-blue-600">GDP</span>
+                                <TrendingUp className="text-blue-600 text-xl mr-2" />
+                                <span className="hidden lg:inline text-blue-600">GDP</span>
                             </Link>
                         </li>
                         <li>
                             <Link to="exchange-rate" className="flex items-center">
-                                <span className="text-blue-600">Exchange</span>
+                                <DollarSignIcon className="text-blue-600 text-xl mr-2" />
+                                <span className="hidden lg:inline text-blue-600">Exchange</span>
                             </Link>
                         </li>
                     </ul>
                 )}
             </li>
 
-            {/* Dropdown for Dashboard 3 */}
+            {/* Dropdown for Inflation */}
             <li>
                 <button
                     className="flex items-center w-full"
                     onClick={() => toggleDropdown(2)}
                 >
-                    <BarChart className="text-4xl text-purple-600 mr-4" />
+                    <BarChart className="text-4xl text-purple-600 mr-2" />
                     <span className="hidden lg:inline ml-2 font-bold text-purple-600">Inflations</span>
                     <span className="ml-auto text-purple-600">
                         {activeDropdown === 2 ? <ChevronUp /> : <ChevronDown />}
                     </span>
                 </button>
                 {activeDropdown === 2 && (
-                    <ul className="ml-8 mt-2 space-y-2">
+                    <ul className="ml-2 mt-2 space-y-2">
                         <li>
                             <Link to="monthly-inflation" className="flex items-center">
-                                <span className="text-purple-600">Monthly</span>
+                                <TrendingUp className="text-purple-600 text-xl mr-2" />
+                                <span className="hidden lg:inline text-purple-600">Monthly</span>
                             </Link>
                         </li>
                         <li>
                             <Link to="historical-inflation" className="flex items-center">
-                                <span className="text-purple-600">Historical</span>
+                                <History className="text-purple-600 text-xl mr-2" />
+                                <span className="hidden lg:inline text-purple-600">Historical</span>
                             </Link>
                         </li>
                     </ul>
@@ -89,22 +93,24 @@ function SideNav() {
                     className="flex items-center w-full"
                     onClick={() => toggleDropdown(3)}
                 >
-                    <DollarSign className="text-4xl text-green-600 mr-4" />
+                    <DollarSign className="text-4xl text-green-600 mr-2" />
                     <span className="hidden lg:inline ml-2 font-bold text-green-600">Financial Analysis</span>
                     <span className="ml-auto text-green-600">
                         {activeDropdown === 3 ? <ChevronUp /> : <ChevronDown />}
                     </span>
                 </button>
                 {activeDropdown === 3 && (
-                    <ul className="ml-8 mt-2 space-y-2">
+                    <ul className="ml-2 mt-2 space-y-2">
                         <li>
                             <Link to="share-prices" className="flex items-center">
-                                <span className="text-green-600">Daily Share Prices</span>
+                                <DollarSign className="text-green-600 text-xl mr-2" />
+                                <span className="hidden lg:inline text-green-600">Daily Share Prices</span>
                             </Link>
                         </li>
                         <li>
                             <Link to="historical-prices" className="flex items-center">
-                                <span className="text-green-600">Historical Share Prices</span>
+                                <History className="text-green-600 text-xl mr-2" />
+                                <span className="hidden lg:inline text-green-600">Historical Share Prices</span>
                             </Link>
                         </li>
                     </ul>
@@ -117,6 +123,7 @@ function SideNav() {
                     <span className="hidden lg:inline ml-2 font-bold text-red-600">Logout</span>
                 </button>
             </li>
+
             <li>
                 <Link to="/" className="flex items-center">
                     <svg

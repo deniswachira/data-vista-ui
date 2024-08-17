@@ -81,23 +81,23 @@ const HistoricalInflationTrend = () => {
     };
 
     return (
-        <div className="bg-white text-gray-900 p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-4 text-purple-600">Historical Monthly Inflation Trend</h2>
-            <div className="flex gap-4 mb-4">
+        <div className="bg-white text-gray-900 p-4 md:p-6 rounded-lg shadow-md">
+            <h2 className="text-xl md:text-2xl font-semibold mb-4 text-purple-600">Historical Monthly Inflation Trend</h2>
+            <div className="flex flex-wrap gap-2 mb-4">
                 <button
-                    className={`px-4 py-2 rounded ${activeFilter === 'YTD' ? 'bg-purple-600 text-white' : 'bg-purple-300 text-purple-600'}`}
+                    className={`px-3 py-2 rounded ${activeFilter === 'YTD' ? 'bg-purple-600 text-white' : 'bg-purple-300 text-purple-600'}`}
                     onClick={() => handleFilter('YTD')}
                 >
                     YTD
                 </button>
                 <button
-                    className={`px-4 py-2 rounded ${activeFilter === '3M' ? 'bg-purple-600 text-white' : 'bg-purple-300 text-purple-600'}`}
+                    className={`px-3 py-2 rounded ${activeFilter === '3M' ? 'bg-purple-600 text-white' : 'bg-purple-300 text-purple-600'}`}
                     onClick={() => handleFilter('3M')}
                 >
                     3M
                 </button>
                 <button
-                    className={`px-4 py-2 rounded ${activeFilter === '1M' ? 'bg-purple-600 text-white' : 'bg-purple-300 text-purple-600'}`}
+                    className={`px-3 py-2 rounded ${activeFilter === '1M' ? 'bg-purple-600 text-white' : 'bg-purple-300 text-purple-600'}`}
                     onClick={() => handleFilter('1M')}
                 >
                     1M
