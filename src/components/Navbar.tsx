@@ -10,7 +10,10 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user, isAuthenticated, role } = useSelector((state: RootState) => state.auth);
-    const{data:userData} = userApi.useGetUserByIdQuery(user?.user.user_id);
+    const user_id = user?.user.user_id;
+    const{data:userData} = userApi.useGetUserByIdQuery(user_id,{
+        skip: !isAuthenticated
+    });
     const profilePicture = `https://ui-avatars.com/api/?name=${userData?.full_name}&background=random` || 'https://via.placeholder.com/150';
 
     const handleLogout = () => {
